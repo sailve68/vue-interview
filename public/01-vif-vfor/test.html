@@ -10,24 +10,49 @@
 <body>
   <div id="app">
     <!-- 过滤列表中项目 -->
-    <div v-for="item in items" :key="item.id" v-if="item.isActive">
-      {{ item.name }}
-    </div>
+    <component1 :text="text" v-if="sc"/>
+    <component2 :text="text2" v-if="sc"/>
   </div>
   <script src="../dist/vue.js"></script>
   <script>
+    let a={ id: 1, name: '张三', isActive: true }
+    let b={ id: 2, name: '李四', isActive: false }
+    let items= [
+            a,b
+          ]
+    const component1={
+      name:'component1',
+      props:{
+        text:String
+      },
+      template:'<div>{{text}}</div>'
+    }
+    const component2={
+      name:'component2',
+      props:{
+        text:String
+      },
+      template:'<div>{{text}}</div>'
+    }    
+    // Vue.component('component1',component1)
     const app = new Vue({
       el: '#app',
+      components:{
+        component1,
+        component2
+      },
       data() {
         return {
-          items: [
-            { id: 1, name: '张三', isActive: true },
-            { id: 2, name: '李四', isActive: false }
-          ]
+          items:items,
+          text:'ASDF',
+          text2:'asdf',
+          sc:true
         }
       },
     })
-    console.log(app.$options.render);   
+    window.app=app
+    window.cp2=component2
+    window.cp1=component1 
   </script>
 </body>
 

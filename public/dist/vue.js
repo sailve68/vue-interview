@@ -1037,6 +1037,7 @@
       enumerable: true,
       configurable: true,
       get: function reactiveGetter () {
+        debugger
         var value = getter ? getter.call(obj) : val;
         if (Dep.target) {
           dep.depend();
@@ -4466,6 +4467,7 @@
    * Evaluate the getter, and re-collect dependencies.
    */
   Watcher.prototype.get = function get () {
+    console.log('render',this.vm)
     pushTarget(this);
     var value;
     var vm = this.vm;
@@ -4529,6 +4531,7 @@
    * Will be called when a dependency changes.
    */
   Watcher.prototype.update = function update () {
+    console.log('update',this.vm)
     /* istanbul ignore else */
     if (this.lazy) {
       this.dirty = true;
